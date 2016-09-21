@@ -14,14 +14,16 @@ function checkCollision(rock) {
   const top = positionToInteger(rock.style.top);
 
   if (top > 360) {
-    const dodgerLeftEdge = positionToInteger(DODGER.style.left);
-    const dodgerRightEdge = positionToInteger(DODGER.style.right);
-    const rockLeftEdge = positionToInteger(rock.style.left);
-    const rockRightEdge = positionToInteger(rock.style.right);
+    const dodgerLeftEdge = positionToInteger(DODGER.style.left)
+    const dodgerRightEdge = 40 + dodgerLeftEdge;
+    const rockLeftEdge = positionToInteger(rock.style.left)
+    const rockRightEdge = 20 + rockLeftEdge;
 
-    if (rockLeftEdge > dodgerLeftEdge || rockLeftEdge > dodgerRightEdge || rockRightEdge > dodgerRightEdge || rockRightEdge > dodgerLeftEdge) {
-      return true;
-    }
+    return (
+      (rockLeftEdge <= dodgerLeftEdge && rockRightEdge >= dodgerLeftEdge) || 
+      (rockLeftEdge >= dodgerLeftEdge && rockRightEdge <= dodgerRightEdge) ||
+      (rockLeftEdge <= dodgerRightEdge && rockRightEdge >= dodgerRightEdge)
+    );
   }
 }
 
@@ -32,9 +34,9 @@ function createRock(x) {
   rock.style.left = `${x}px`;
 
   //tweaked to pass ide testing bug. should be set to following for browser
-    // var top = 0;
-    // rock.style.top = top;
-  var top = rock.style.top;
+    var top = 0;
+    rock.style.top = top;
+
 
   GAME.appendChild(rock);
 

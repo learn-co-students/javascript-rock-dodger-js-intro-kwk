@@ -1,6 +1,7 @@
 /**
  * Don't change these constants!
  */
+
 const DODGER = document.getElementById('dodger')
 const GAME = document.getElementById('game')
 const GAME_HEIGHT = 400
@@ -62,16 +63,15 @@ function createRock(x) {
   rock.style.left = `${x}px`
 
   // Hmmm, why would we have used `var` here?
-  var top = 0
 
-  rock.style.top = top
+  rock.style.top = top = 0;
 
 
   /**
    * Now that we have a rock, we'll need to append
    * it to GAME and move it downwards.
    */
-  GAME.appendChild(rock)
+  GAME.appendChild(rock);
   /**
    * This function moves the rock. (2 pixels at a time
    * seems like a good pace.)
@@ -129,7 +129,8 @@ function endGame() {
   START.innerHTML = 'Play again?';
   START.style.display = 'inline';
 
-  return alert('YOU LOSE!')
+  /*return*/
+  alert("YOU LOSE!")
 }
 
 function moveDodger(e) {

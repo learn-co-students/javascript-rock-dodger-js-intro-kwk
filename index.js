@@ -70,7 +70,7 @@ function createRock(x) {
    * Now that we have a rock, we'll need to append
    * it to GAME and move it downwards.
    */
-   GAME.append(rock)
+   //GAME.append(rock)
 
   /**
    * This function moves the rock. (2 pixels at a time
@@ -84,6 +84,7 @@ function createRock(x) {
      * we should call endGame()
      */
      rock.style.top = `${top += 2}px`
+     
      if (checkCollision()) {
        endGame()
      } else if (rock.style.top > 400) {
@@ -120,7 +121,7 @@ function createRock(x) {
  */
 function endGame() {
   gameInterval = clearInterval(gameInterval)
-  ROCKS = []
+  ROCKS = ROCKS
   window.removeEventListener('keydown',moveDodger)
   alert("YOU LOSE!")
 }
@@ -134,8 +135,8 @@ function moveDodger(e) {
    * we've declared for you above.)
    * And be sure to use the functions declared below!
    */
-   const dodgerLeftEdge = positionToInteger(DODGER.style.left)
-   const dodgerRightEdge = dodgerLeftEdge + 40
+   var dodgerLeftEdge = positionToInteger(DODGER.style.left)
+   var dodgerRightEdge = dodgerLeftEdge + 40
    const key = parseInt(e.which)
    if (key === LEFT_ARROW && dodgerLeftEdge>0) {
 

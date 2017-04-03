@@ -28,17 +28,17 @@ function checkCollision(rock) {
   if (top > 360) {
     const dodgerLeftEdge = positionToInteger(DODGER.style.left)
 
-    // FIXME: The DODGER is 40 pixels wide -- how do we get the right edge?
+    // The DODGER is 40 pixels wide -- how do we get the right edge?
     const dodgerRightEdge = dodgerLeftEdge + 40;
 
     const rockLeftEdge = positionToInteger(rock.style.left)
 
-    // FIXME: The rock is 20 pixel's wide -- how do we get the right edge?
+    //The rock is 20 pixel's wide -- how do we get the right edge?
     const rockRightEdge = rockLeftEdge + 20;
 
-    if ((rockLeftEdge < dodgerLeftEdge && rockRightEdge > dodgerLeftEdge) ||
-       (rockLeftEdge > dodgerLeftEdge && rockRightEdge < dodgerRightEdge) ||
-       (rockLeftEdge < dodgerRightEdge && rockRightEdge > dodgerRightEdge)/**
+    if ((rockLeftEdge <= dodgerLeftEdge && rockRightEdge >= dodgerLeftEdge) ||
+       (rockLeftEdge >= dodgerLeftEdge && rockRightEdge =< dodgerRightEdge) ||
+       (rockLeftEdge <= dodgerRightEdge && rockRightEdge >= dodgerRightEdge)/**
                * Think about it -- what's happening here?
                * There's been a collision if one of three things is true:
                * 1. The rock's left edge is < the DODGER's left edge,
@@ -50,6 +50,8 @@ function checkCollision(rock) {
                */) {
       return true
     }
+  } else {
+    return false
   }
 }
 
@@ -118,7 +120,7 @@ function createRock(x) {
  */
 function endGame() {
   clearInterval(gameInterval)
-  ROCKS.remove()
+  ROCKS = []
   moveDodger.remove()
   alert("YOU LOSE!")
 }
@@ -132,10 +134,13 @@ function moveDodger(e) {
    * we've declared for you above.)
    * And be sure to use the functions declared below!
    */
+   const dodgerLeftEdge = positionToInteger(DODGER.style.left)
+   const dodgerRightEdge = dodgerLeftEdge + 40
    const key = parseInt(e.which)
-   if (key === LEFT_ARROW) {
+   if (key === LEFT_ARROW && dodgerLeftEdge>=0) {
+
      moveDodgerLeft()
-   } else if (key === RIGHT_ARROW) {
+   } else if (key === RIGHT_ARROW && dodgerRightEdge <=400 ) {
      moveDodgerRight()
    }
 }

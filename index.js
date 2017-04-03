@@ -37,7 +37,7 @@ function checkCollision(rock) {
     const rockRightEdge = rockLeftEdge + 20;
 
     if ((rockLeftEdge <= dodgerLeftEdge && rockRightEdge >= dodgerLeftEdge) ||
-       (rockLeftEdge >= dodgerLeftEdge && rockRightEdge =< dodgerRightEdge) ||
+       (rockLeftEdge >= dodgerLeftEdge && rockRightEdge <= dodgerRightEdge) ||
        (rockLeftEdge <= dodgerRightEdge && rockRightEdge >= dodgerRightEdge)/**
                * Think about it -- what's happening here?
                * There's been a collision if one of three things is true:
@@ -119,9 +119,9 @@ function createRock(x) {
  * Finally, alert "YOU LOSE!" to the player.
  */
 function endGame() {
-  clearInterval(gameInterval)
+  gameInterval = clearInterval(gameInterval)
   ROCKS = []
-  moveDodger.remove()
+  window.removeEventListener('keydown',moveDodger)
   alert("YOU LOSE!")
 }
 
@@ -137,11 +137,15 @@ function moveDodger(e) {
    const dodgerLeftEdge = positionToInteger(DODGER.style.left)
    const dodgerRightEdge = dodgerLeftEdge + 40
    const key = parseInt(e.which)
-   if (key === LEFT_ARROW && dodgerLeftEdge>=0) {
+   if (key === LEFT_ARROW && dodgerLeftEdge>0) {
 
      moveDodgerLeft()
-   } else if (key === RIGHT_ARROW && dodgerRightEdge <=400 ) {
+     e.stopPropagation()
+     e.preventDefault()
+   } else if (key === RIGHT_ARROW && dodgerRightEdge <400 ) {
      moveDodgerRight()
+     e.stopPropagation()
+     e.preventDefault()
    }
 }
 

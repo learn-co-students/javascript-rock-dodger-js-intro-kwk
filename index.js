@@ -122,7 +122,7 @@ function createRock(x) {
 function endGame() {
   gameInterval = clearInterval(gameInterval)
   ROCKS.splice(0,ROCKS.length-1)
-  window.removeEventListener('keydown',moveDodger)
+  window.removeEventListener('keydown',moveDodger,false)
   alert("YOU LOSE!")
 }
 
@@ -138,7 +138,7 @@ function moveDodger(e) {
    var dodgerLeftEdge = positionToInteger(DODGER.style.left)
    var dodgerRightEdge = dodgerLeftEdge + 40
    const key = parseInt(e.which)
-   if (key === LEFT_ARROW && dodgerLeftEdge>0) {
+   if (key === LEFT_ARROW) {
 
      moveDodgerLeft()
      e.stopPropagation()
@@ -158,7 +158,9 @@ function moveDodgerLeft() {
    */
    var dodgerLeftEdge = positionToInteger(DODGER.style.left)
    function left() {
-     DODGER.style.left = `${dodgerLeftEdge -4}px`
+     if (dodgerLeftEdge>0) {
+       DODGER.style.left = `${dodgerLeftEdge -4}px`
+     }
    }
    window.requestAnimationFrame(left)
 }
@@ -171,7 +173,9 @@ function moveDodgerRight() {
    */
    var dodgerLeftEdge = positionToInteger(DODGER.style.left)
    function right() {
-     DODGER.style.left = `${dodgerLeftEdge +4}px`
+     if (dodgerLeftEdge<360) {
+       DODGER.style.left = `${dodgerLeftEdge +4}px`
+     }
    }
    window.requestAnimationFrame(right)
 }

@@ -84,10 +84,10 @@ function createRock(x) {
      * we should call endGame()
      */
      rock.style.top = `${top += 2}px`
-     
+
      if (checkCollision()) {
        endGame()
-     } else if (rock.style.top > 400) {
+     } else if (positionToInteger(rock.style.top) > 400) {
        rock.remove()
      } else {
        window.requestAnimationFrame(moveRock)
@@ -121,7 +121,7 @@ function createRock(x) {
  */
 function endGame() {
   gameInterval = clearInterval(gameInterval)
-  ROCKS = ROCKS
+  ROCKS.remove()
   window.removeEventListener('keydown',moveDodger)
   alert("YOU LOSE!")
 }
